@@ -1,0 +1,15 @@
+<p>Home page</p>
+<h2>List of quizzes</h2>
+<ol>
+  @for (category of categories; track category.id) {
+  <li class="listItem">
+    <span>{{ category.name }}</span>
+    |
+    <span> {{ category.numberOfQuestions }} questions</span>
+    |
+    <button>Play</button>
+  </li>
+  }
+</ol>
+
+<button>I'm lucky</button>
