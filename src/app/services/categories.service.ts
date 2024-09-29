@@ -2,15 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Category } from '../interfaces/category.interface';
 import { map, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-  private categoriesUrl = 'https://opentdb.com/api_category.php';
-  private categoriesCache: Category[] | null = null;
-  http = inject(HttpClient);
-  constructor() {}
+  private categoriesUrl = environment.categoriesUrl;
+  private http = inject(HttpClient);
 
   getRandomCategories(count: number = 10): Observable<Category[]> {
     return this.http
@@ -24,8 +23,7 @@ export class CategoriesService {
   }
 
   private getRandomItems<T>(items: T[], count: number): T[] {
-    const shuffled = items.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+    return items.sort(() => 0.5 - Math.random()).slice(0, count);
   }
 
   getRandomInt(min: number, max: number): number {

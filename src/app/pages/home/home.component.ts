@@ -2,11 +2,23 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from '../../interfaces/category.interface';
 import { CategoriesService } from '../../services/categories.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatLineModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    MatCardModule,
+    MatToolbar,
+    MatButtonModule,
+    MatListModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

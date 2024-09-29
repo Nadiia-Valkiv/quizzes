@@ -6,17 +6,19 @@ import { FinishComponent } from './pages/finish/finish.component';
 export const routes: Routes = [
   {
     path: '',
-    title: 'App Home Page',
+    title: 'Home Page',
     component: HomeComponent,
   },
   {
     path: 'quiz',
-    title: 'App Play Page',
-    component: PlayComponent,
+    title: 'Play',
+    loadComponent: () =>
+      import('./pages/play/play.component').then((m) => m.PlayComponent),
   },
   {
     path: 'finish',
-    title: 'App Finish Page',
-    component: FinishComponent,
+    title: 'Finish',
+    loadComponent: () =>
+      import('./pages/finish/finish.component').then((m) => m.FinishComponent),
   },
 ];
