@@ -7,6 +7,9 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatLineModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
+import { map, Observable } from 'rxjs';
+import { categoriesStore } from '../../store/categories.store';
+import { select, setProp } from '@ngneat/elf';
 
 @Component({
   selector: 'app-home',
@@ -23,20 +26,27 @@ import { MatListModule } from '@angular/material/list';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
+  categories$!: Observable<Category[]>;
   categories: Category[] = [];
   categoriesService = inject(CategoriesService);
 
   ngOnInit(): void {
-    this.loadCategories();
+    this.categories$ = categoriesStore.pipe(
+      select((state) => state.categories)
+    );
+
+    this.categories$.subscribe((categories) => {
+      if (categories.length === 0) {
+        this.loadCategories();
+      } else {
+        this.categories = categories;
+      }
+    });
   }
+
   loadCategories(): void {
     this.categoriesService.getRandomCategories().subscribe(
-      (data) => {
-        this.categories = data.map((category) => ({
-          ...category,
-          numberOfQuestions: this.categoriesService.getRandomInt(5, 10),
-        }));
-      },
+      (data) => (this.categories = data),
       (error) => {
         console.error('Error fetching categories', error);
       }
