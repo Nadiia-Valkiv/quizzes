@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'quiz',
+    path: 'play/:id/:numberOfQuestions',
     title: 'Play',
     loadComponent: () =>
       import('./pages/play/play.component').then((m) => m.PlayComponent),

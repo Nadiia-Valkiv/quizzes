@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from '../../interfaces/category.interface';
 import { CategoriesService } from '../../services/categories.service';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   categories$!: Observable<Category[]>;
   categories: Category[] = [];
   categoriesService = inject(CategoriesService);
-
+  router = inject(Router);
   ngOnInit(): void {
     this.categories$ = categoriesStore.pipe(
       select((state) => state.categories)
@@ -51,5 +51,9 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching categories', error);
       }
     );
+  }
+
+  goToPlay(id: number, numberOfQuestions: number | undefined): void {
+    this.router.navigate(['play', id, numberOfQuestions]);
   }
 }

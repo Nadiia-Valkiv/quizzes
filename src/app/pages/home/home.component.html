@@ -9,7 +9,13 @@
           The quiz consists of {{ category.numberOfQuestions }} questions
         </div>
       </span>
-      <button mat-raised-button class="play-button">Play</button>
+      <button
+        mat-raised-button
+        class="play-button"
+        (click)="goToPlay(category.id, category.numberOfQuestions)"
+      >
+        Play
+      </button>
     </li>
     }
   </ol>
