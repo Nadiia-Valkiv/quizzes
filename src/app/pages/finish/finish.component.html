@@ -1,1 +1,32 @@
-<p>finish works!</p>
+<a routerLink="">Back to Home Page</a>
+
+<div class="statistic-container">
+  <h2>Quiz Results</h2>
+
+  <div class="statistic-item">
+    <span class="statistic-label">Total Questions:</span>
+    <span class="statistic-value"> {{ statistics.numberOfQuestions }}</span>
+  </div>
+
+  <div class="statistic-item">
+    <span class="statistic-label">Correct Answers: </span>
+    <span class="statistic-value"> {{ statistics.score }}</span>
+  </div>
+
+  <div class="statistic-item">
+    <span class="statistic-label">Time Taken : </span>
+    <span class="statistic-value"> {{ statistics.timeTaken | time }}</span>
+  </div>
+
+  <div class="statistic-item">
+    <span class="statistic-label">Accuracy Percentage: </span>
+    <span class="statistic-value"> {{ statistics.accuracyPercentage }}%</span>
+  </div>
+
+  <div class="statistic-item">
+    <span class="statistic-label">Average Time Per Question :</span>
+    <span class="statistic-value">
+      {{ statistics.averageTimePerQuestion | time }}</span
+    >
+  </div>
+</div>

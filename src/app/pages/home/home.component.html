@@ -2,21 +2,21 @@
   <h2>List of quizzes</h2>
   <ol>
     @for (category of categories; track category.id) {
-    <li class="listItem">
-      <span class="category-name"
-        >{{ category.name }}
-        <div class="quiz-description">
-          The quiz consists of {{ category.numberOfQuestions }} questions
-        </div>
-      </span>
-      <button
-        mat-raised-button
-        class="play-button"
-        (click)="goToPlay(category.id, category.numberOfQuestions)"
-      >
-        Play
-      </button>
-    </li>
+      <li class="listItem">
+        <span class="category-name"
+          >{{ category.name }}
+          <div class="quiz-description">
+            The quiz consists of {{ category.numberOfQuestions }} questions
+          </div>
+        </span>
+        <button
+          mat-raised-button
+          class="play-button"
+          (click)="goToPlay(category.id, category.numberOfQuestions)"
+        >
+          Play
+        </button>
+      </li>
     }
   </ol>
   <span class="lucky-button-text">

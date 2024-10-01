@@ -1,1 +1,0 @@
-import{Ha as i,Ia as o,Na as s,Pa as a,W as t}from"./chunk-MRILPGDL.js";var p=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=t({type:n,selectors:[["app-finish"]],standalone:!0,features:[a],decls:2,vars:0,template:function(e,r){e&1&&(i(0,"p"),s(1,"finish works!"),o())}})};export{p as FinishComponent};

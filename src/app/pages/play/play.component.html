@@ -1,1 +1,66 @@
-<p>play works!</p>
+@if (questions().length > 0) {
+  <div class="quiz-container">
+    <h2>Welcome to the Quiz</h2>
+    <h3>{{ currentQuestion().category }}</h3>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title
+          >Question {{ currentQuestionIndex() + 1 }} ({{
+            currentQuestionIndex() + 1
+          }}
+          / {{ questions().length }})</mat-card-title
+        >
+        <mat-card-subtitle>
+          Difficulty rating: {{ currentQuestion().difficulty }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ currentQuestion().question }}</p>
+        <mat-radio-group
+          [(ngModel)]="currentQuestion()!.userAnswer"
+          (ngModelChange)="onAnswerSelected()"
+        >
+          @for (answer of currentQuestion().allAnswers || []; track $index) {
+            <mat-radio-button [value]="answer">
+              {{ answer }}
+            </mat-radio-button>
+          }
+        </mat-radio-group>
+      </mat-card-content>
+      <mat-card-actions>
+        @if (isLastQuestion()) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submitQuiz()"
+            [disabled]="!currentQuestion()!.userAnswer"
+          >
+            Submit Quiz
+          </button>
+        } @else {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="nextQuestion()"
+            [disabled]="!currentQuestion()!.userAnswer"
+          >
+            Next
+          </button>
+        }
+      </mat-card-actions>
+    </mat-card>
+    <button mat-raised-button color="primary" (click)="goToHomePage()">
+      Cancel quiz and return to Quizzes list
+    </button>
+  </div>
+} @else {
+  <div class="loading">
+    <p>Loading questions...</p>
+  </div>
+}
+@if (currentQuestionIndex() === questions().length && questions().length > 0) {
+  <div class="quiz-completed">
+    <h2>Quiz Completed!</h2>
+    <button mat-raised-button (click)="submitQuiz()">Submit Quiz</button>
+  </div>
+}

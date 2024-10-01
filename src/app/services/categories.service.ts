@@ -12,8 +12,11 @@ import { setProp } from '@ngneat/elf';
 export class CategoriesService {
   private categoriesUrl = environment.categoriesUrl;
   private http = inject(HttpClient);
+  private categoriesNumber = environment.numberOfQuizCategories;
 
-  getRandomCategories(count: number = 10): Observable<Category[]> {
+  getRandomCategories(
+    count: number = this.categoriesNumber,
+  ): Observable<Category[]> {
     return this.http
       .get<{ trivia_categories: Category[] }>(this.categoriesUrl)
       .pipe(
@@ -22,12 +25,12 @@ export class CategoriesService {
             (category) => ({
               ...category,
               numberOfQuestions: this.getRandomInt(5, 10),
-            })
-          )
+            }),
+          ),
         ),
         tap((categories) => {
           categoriesStore.update(setProp('categories', categories));
-        })
+        }),
       );
   }
 
@@ -35,7 +38,7 @@ export class CategoriesService {
     return items.sort(() => 0.5 - Math.random()).slice(0, count);
   }
 
-  getRandomInt(min: number, max: number): number {
+  private getRandomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
