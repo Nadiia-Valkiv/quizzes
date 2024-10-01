@@ -56,4 +56,9 @@ export class HomeComponent implements OnInit {
   goToPlay(id: number, numberOfQuestions: number | undefined): void {
     this.router.navigate(['play', id, numberOfQuestions]);
   }
+
+  playLucky() {
+    const randomCategory = this.categories[this.categoriesService.getRandomInt(0, this.categories.length - 1)];
+    this.goToPlay(randomCategory.id, randomCategory.numberOfQuestions);
+  }
 }

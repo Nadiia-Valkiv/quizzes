@@ -13,6 +13,8 @@ export class CategoriesService {
   private categoriesUrl = environment.categoriesUrl;
   private http = inject(HttpClient);
   private categoriesNumber = environment.numberOfQuizCategories;
+  private minNumberQuestions = environment.minNumberOfQuizCategories;
+  private maxNumberQuestions = environment.maxNumberOfQuizCategories;
 
   getRandomCategories(
     count: number = this.categoriesNumber,
@@ -24,7 +26,7 @@ export class CategoriesService {
           this.getRandomItems(response.trivia_categories, count).map(
             (category) => ({
               ...category,
-              numberOfQuestions: this.getRandomInt(5, 10),
+              numberOfQuestions: this.getRandomInt(this.minNumberQuestions, this.maxNumberQuestions),
             }),
           ),
         ),
@@ -38,7 +40,7 @@ export class CategoriesService {
     return items.sort(() => 0.5 - Math.random()).slice(0, count);
   }
 
-  private getRandomInt(min: number, max: number): number {
+  getRandomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
